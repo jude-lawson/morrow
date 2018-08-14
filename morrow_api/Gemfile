@@ -15,6 +15,7 @@ end
 group :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers'
+  gem 'pry'
 end
 
 group :development do
