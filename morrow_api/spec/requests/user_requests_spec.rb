@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'User Requests' do
-  describe 'POST api/v1/users/:id' do
+  describe 'POST /api/v1/users' do
     it 'should create the user\'s profile information' do
       new_user_data = {
         first_name: 'Sally',
