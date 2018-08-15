@@ -12,8 +12,7 @@ RSpec.describe 'Task Requests' do
 
   describe 'GET /api/v1/users/:id/tasks' do
     it 'should return all tasks for that user' do
-      allow_any_instance_of(Api::V1::ApplicationController).to receive(:current_user).and_return(@user1)
-      get "/api/v1/users/#{@user1.id}/tasks"
+      get "/api/v1/users/#{@user1.id}/tasks", headers: { 'Authorization': "Bearer #{@user1.token}" }
 
       expect(response).to be_successful
       expect(response.body).to eq([@task1, @task2].to_json)
@@ -21,7 +20,7 @@ RSpec.describe 'Task Requests' do
 
     it 'should return a 403 if a user tries to access another user\'s tasks' do
       allow_any_instance_of(Api::V1::ApplicationController).to receive(:current_user).and_return(@user1)
-      get "/api/v1/users/#{@user2.id}/tasks"
+      get "/api/v1/users/#{@user2.id}/tasks", headers: { 'Authorization': "Bearer #{@user1.token}" }
 
       expect(response).to have_http_status(403)
     end
