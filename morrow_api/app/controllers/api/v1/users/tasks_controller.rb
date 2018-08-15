@@ -1,4 +1,6 @@
-class Api::V1::Users::TasksController < ApplicationController
+class Api::V1::Users::TasksController < Api::V1::ApplicationController
+  before_action :require_id_match, only: [:index]
+  
   def index
     begin
       user_tasks = User.find(params[:id]).tasks
